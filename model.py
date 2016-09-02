@@ -5,7 +5,7 @@ from passage.models import RNN
 import random
 import sys
 
-def build_model(weights=None, embedding_size=128, recurrent_gate_size=256, n_features=5, dropout=0.1):
+def build_model(weights=None, embedding_size=256, recurrent_gate_size=512, n_features=5, dropout=0.4):
     """
     build_model
 
@@ -54,3 +54,18 @@ def train_model(model, train_data, epochs, save_name):
 
     tokens, labels = zip(*all_data)
     model.fit(tokens, labels, n_epochs=epochs, path=save_name, snapshot_freq=3)
+
+def test():
+    model_name = "resources/DeepLincM5.pkl.90"
+    from tests import load_test_seqs
+    from passage.utils import load
+    from evaluate import batch_predict
+
+    seqs = load_test_seqs()
+    mrnn = load(model_name)
+    for p in batch_predict([mrnn], seqs):
+        print p
+    
+
+if __name__ == "__main__":
+    test()

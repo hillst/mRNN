@@ -2,7 +2,7 @@
 fasta 
 """
 
-def load_fasta(filename, min_size):
+def load_fasta(filename, min_size=200):
     """
     load_fasta
 
